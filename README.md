@@ -2,7 +2,7 @@
 
 This repository contains relevant materials, code, and resources for research on **Production Function Estimation**.
 
-## Compustat data, Production Functions and TFP Jorge de la Cal Medina
+## Compustat data, Production Functions and TFP
 
 Data: Use Create_data.do to create a dataset with firm-level financial statements. This code is directly from the replication files of De Locker et al (2020). Go through the documentation to learn about the variables.
 
