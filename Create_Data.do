@@ -13,8 +13,8 @@ Access compustat (WRDS)
 > GVKEY CODE - search the entire database
 > CONSOLIDATED ACCOUNTS, FORMAT INDL AND FS (BELOW DROP FS IF REPORTED BOTH), DOMESTIC POPULATION SOURCE, DATA FORMAT STD, 
 >> DATA SELECTED:
-	SALE, COGS, XLR, XSGA, PPEGT, PPENT, INTAN, XRD, XAD, EMP, MKVALT, DVT, INDUSTRY INFO (NAICS)
-	additional data for robustness: foreign incorp code, company name, 
+	SALE, COGS, XLR, XSGA, PPEGT, PPENT, INTAN, XRD, XAD, EMP, MKVALT, DVT, INDUSTRY INFO (NAICS), gvkey, csho, oibdp, prcc_f
+	additional data for robustness: foreign incorp code, company name,
 	
 	* external datasets:
 		1. interest_rate.dta
