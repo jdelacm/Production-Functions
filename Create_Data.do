@@ -20,7 +20,7 @@ Access compustat (WRDS)
 		1. interest_rate.dta
 		2. us_gdpdeflator.dta
 */
-cd "/Users/jcm/Desktop/Theses Bachelor UVA/Compustat data, Production Functions and TFP/data"
+cd "path_to_your_directory/data"
 * insert your data file here:
  use "datafile.dta", clear
 qui {
