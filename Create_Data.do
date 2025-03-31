@@ -20,7 +20,7 @@ Access compustat (WRDS)
 		1. interest_rate.dta
 		2. us_gdpdeflator.dta
 */
-cd "/Users/jcm/Desktop/RMP_DELOE_repl/RMP_DLEU/data/"
+cd "/Users/jcm/Desktop/Theses Bachelor UVA/Compustat data, Production Functions and TFP/data"
 * insert your data file here:
  use "datafile.dta", clear
 qui {
@@ -92,7 +92,6 @@ gen trim=0
 keep if year>1949
 
 * save files to temp directory
-cd "/Users/jcm/Desktop/RMP_DELOE_repl/RMP_DLEU/temp"
 * main results for 1% trim (below)
 * robustness for appendix: change to p(x) p(y) with x=2-5 and y=95-98
 * robustness 2% and 5%
@@ -140,3 +139,5 @@ restore
 }
 *--------------------------------------------------*
 * data created 
+* to export data
+export delimited using "data.csv", replace
