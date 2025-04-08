@@ -142,4 +142,5 @@ restore
 *--------------------------------------------------*
 * data created 
 * to export data
+cd "/Users/jcm/Desktop/Theses Bachelor UVA/Compustat data, Production Functions and TFP/data"
 export delimited using "data.csv", replace
