@@ -13,14 +13,15 @@ Access compustat (WRDS)
 > GVKEY CODE - search the entire database
 > CONSOLIDATED ACCOUNTS, FORMAT INDL AND FS (BELOW DROP FS IF REPORTED BOTH), DOMESTIC POPULATION SOURCE, DATA FORMAT STD, 
 >> DATA SELECTED:
-	SALE, COGS, XLR, XSGA, PPEGT, PPENT, INTAN, XRD, XAD, EMP, MKVALT, DVT, INDUSTRY INFO (NAICS)
+	SALE, COGS, XLR, XSGA, PPEGT, PPENT, INTAN, XRD, XAD, EMP, MKVALT, DVT, INDUSTRY INFO (NAICS),
+	gvkey, tic, csho, oibdp, prcc_f
 	additional data for robustness: foreign incorp code, company name, 
 	
 	* external datasets:
 		1. interest_rate.dta
 		2. us_gdpdeflator.dta
 */
-cd "/Users/jcm/Desktop/prodfunsubjexp/data"
+cd "/Users/jcm/Desktop/Theses Bachelor UVA/Compustat data, Production Functions and TFP/data"
 * insert your data file here:
  use "all_90_25_tic.dta", clear
 qui {
@@ -92,7 +93,7 @@ gen trim=0
 keep if year>1949
 
 * save files to temp directory
-*cd "/Users/jcm/Desktop/RMP_DELOE_repl/RMP_DLEU/temp"
+cd "/Users/jcm/Desktop/Theses Bachelor UVA/Compustat data, Production Functions and TFP/temp"
 * main results for 1% trim (below)
 * robustness for appendix: change to p(x) p(y) with x=2-5 and y=95-98
 * robustness 2% and 5%
