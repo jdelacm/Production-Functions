@@ -13,16 +13,16 @@ Access compustat (WRDS)
 > GVKEY CODE - search the entire database
 > CONSOLIDATED ACCOUNTS, FORMAT INDL AND FS (BELOW DROP FS IF REPORTED BOTH), DOMESTIC POPULATION SOURCE, DATA FORMAT STD, 
 >> DATA SELECTED:
-	SALE, COGS, XLR, XSGA, PPEGT, PPENT, INTAN, XRD, XAD, EMP, MKVALT, DVT, INDUSTRY INFO (NAICS), gvkey, csho, oibdp, prcc_f
-	additional data for robustness: foreign incorp code, company name,
+	SALE, COGS, XLR, XSGA, PPEGT, PPENT, INTAN, XRD, XAD, EMP, MKVALT, DVT, INDUSTRY INFO (NAICS)
+	additional data for robustness: foreign incorp code, company name, 
 	
 	* external datasets:
 		1. interest_rate.dta
 		2. us_gdpdeflator.dta
 */
-cd "path_to_your_directory/data"
+cd "/Users/jcm/Desktop/prodfunsubjexp/data"
 * insert your data file here:
- use "datafile.dta", clear
+ use "all_90_25_tic.dta", clear
 qui {
 sort gvkey fyear
 rename fyear year
@@ -47,7 +47,7 @@ label var newmk2 " fiscal year market value prior 1998
 replace mkvalt  = newmk2 if mkvalt==.
 
 * use following variables:
-keep gvkey year naics ind* sale cogs xsga xlr xrd xad dvt ppegt intan emp mkvalt oibdp
+keep gvkey tic year naics ind* sale cogs xsga xlr xrd xad dvt ppegt ppent intan emp mkvalt oibdp
 replace sale	= sale*1000
 replace xlr		= xlr*1000
 replace oibdp	=oibdp*1000
@@ -56,7 +56,7 @@ replace xsga 	= xsga*1000
 replace mkvalt 	= mkvalt*1000
 replace dvt 	= dvt*1000
 replace ppegt	= ppegt*1000
-*replace ppent 	= ppent*1000
+replace ppent 	= ppent*1000
 replace intan	= intan*1000
 
 /* Macro vars: - Merge in Usercost and US GDP deflator
@@ -74,7 +74,7 @@ gen xsga_D 		= (xsga/USGDP)*100
 gen mkvalt_D 	= (mkvalt/USGDP)*100
 gen dividend_D	= (dvt/USGDP)*100
 gen capital_D   = (ppegt/USGDP)*100
-*gen capital2_D  = (ppent/USGDP)*100
+gen capital2_D  = (ppent/USGDP)*100
 gen intan_D		= (intan/USGDP)*100
 gen xlr_D 		= (xlr/USGDP)*100
 gen kexp		= (usercost*capital_D)
@@ -92,6 +92,7 @@ gen trim=0
 keep if year>1949
 
 * save files to temp directory
+*cd "/Users/jcm/Desktop/RMP_DELOE_repl/RMP_DLEU/temp"
 * main results for 1% trim (below)
 * robustness for appendix: change to p(x) p(y) with x=2-5 and y=95-98
 * robustness 2% and 5%
