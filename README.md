@@ -1,4 +1,4 @@
-# Production-Functions
+# Production Function Estimation
 
 This repository contains relevant materials, code, and resources for research on **Production Function Estimation**.
 
