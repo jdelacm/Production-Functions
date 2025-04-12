@@ -17,55 +17,85 @@ Accessed via WRDS (through UvA library):
 
 
 ### **Output elasticities**
-Assuming perfect competition and constant returns to scale then the elasticities equal the share of revenues paid to each input (see De Locker et al, 2020 and Syverson 2011). This is a good first approach to identify the production function. In our dataset you can use expenditure variables to get capital and labor elasticities. Capital expenditure: kexp, Staff expense: xlr, Cost of goods sold: cogs.
+Using financial statement data, we estimate **output elasticities** of capital and labor. Several estimators are implemented:
+- **Olley-Pakes (OP)**
+- **Levinsohn-Petrin (LP)**
+- **Ackerberg-Caves-Frazer (ACF)**
+- **Wooldridge (WRDG)**
+
+Assuming perfect competition and constant returns to scale, the elasticities are equivalent to revenue shares of inputs (see De Loecker et al., 2020; Syverson, 2011). This provides a useful baseline for production function identification.
 
 ### **TFP**
-Once we have estimates for the input elasticities we can construct TFP measures as the ratio of output to input contributions. The input contribution is an index that consists of properly weighted individual inputs. In case of Cobb-Douglas production function this is just weighted geometric mean of inputs, with output elasticities as weights (See Syverson 2011, Section 2.2).
+TFP is computed as the ratio of actual output to the predicted contribution of inputs. In a Cobb-Douglas specification, this simplifies to a weighted geometric mean of inputs:
+
+\[
+TFP_{it} = \frac{Y_{it}}{K_{it}^{\alpha_K} L_{it}^{\alpha_L}
+\]
+
+where weights \(\alpha\) are estimated output elasticities. For further details, see Syverson (2011), Section 2.2.
 
 
 ## Contents
 
-- **`Create_Data.do`**  
-  Stata script for cleaning, merging, and processing firm-level and macroeconomic data.  
-  This code is taken directly from the replication files of De Loecker et al. (2020).  
-  Refer to the comments and documentation within the script to understand the variables and transformations.
+### `Create_Data.do`
 
-  **Key steps performed in this script:**
+Stata script for cleaning, processing, and merging firm-level and macroeconomic data. This file is adapted from the replication materials of De Loecker et al. (2020).
 
-     **Load firm-level data** from Compustat (e.g. `all_90_25_tic.dta`)
-     **Clean and filter observations:**
-     - Remove duplicate entries by firm-year
-     - Drop firms without industry classification (NAICS)
-     - Retain only consolidated firm records
-     **Construct industry identifiers**:
-     - Generate 2-, 3-, and 4-digit NAICS codes
-     - Group firms accordingly
-    **Adjust monetary variables**:
-     - Reconstruct missing market values using share price × shares outstanding
-     - Scale all monetary variables to consistent units (×1000)
-    **Merge macroeconomic data**:
-     - Merge GDP deflator and user cost of capital by year
-     - Compute deflated versions of firm-level variables
-    **Generate derived variables**:
-     - Capital expenditure (`kexp`)
-     - Imputed materials cost (`mat1`)
-     - Sales-to-COGS ratio (`s_g`)
-    **Trim outliers**:
-     - Remove extreme `s_g` values (bottom/top percentiles)
-     - Save datasets for different trimming thresholds (1%, 2%, ..., 5%)
-    **Export datasets**:
-     - Save final `.dta` files
-     - Export trimmed dataset as `data.csv`
+**Main steps:**
+- Load Compustat data
+- Remove duplicates, drop firms without NAICS, and keep only consolidated records
+- Generate 2-, 3-, and 4-digit NAICS codes
+- Adjust monetary variables (e.g. reconstruct market value as `PRCC_F * CSHO`)
+- Merge macro data (GDP deflator, interest rates, user cost of capital)
+- Generate derived variables (e.g. capital expenditures, imputed materials)
+- Trim outliers based on the sales-to-COGS ratio
+- Save cleaned datasets (`.dta` and `.csv`)
 
-- **data**
-  Folder with required data and storage of data from Create_Data.do.
-  - **Macroeconomic Data**
-    - Nominal interest rates (FRED)
-    - U.S. GDP deflator
-    - User cost of capital computed using nominal rates, inflation, and depreciation.
+---
 
-## Citation
+### `Prod_Fun_Est.do`
+
+Stata script for estimating production functions using `prodest`.
+
+**Key features:**
+- Filters the sample by year range and NAICS industry (2-, 3-, or 4-digit)
+- Constructs log-transformed variables:
+  - `y`: Output (log of sales)
+  - `k`: Capital
+  - `l`: Labor (number of employees)
+  - `m`: Intermediate inputs (COGS minus labor expenses)
+- Estimates three specifications:
+  1. **OLS Cobb-Douglas**
+  2. **Levinsohn-Petrin (LP)** using `method(lp)`
+  3. **ACF correction** using `method(lp) acf`
+- Saves first-stage residuals for TFP construction
+- Outputs results using `esttab` (LaTeX-compatible)
+
+
+
+
+## References
 
 De Loecker, Jan, Jan Eeckhout, and Gabriel Unger.  
 *"The Rise of Market Power and the Macroeconomic Implications."*  
-Quarterly Journal of Economics, 2020.
+*Quarterly Journal of Economics*, 2020.
+
+Olley, G. Steven, and Ariel Pakes.  
+*"The Dynamics of Productivity in the Telecommunications Equipment Industry."*  
+*Econometrica*, 1996, Vol. 64(6), pp. 1263–1297.
+
+Levinsohn, James, and Amil Petrin.  
+*"Estimating Production Functions Using Inputs to Control for Unobservables."*  
+*Review of Economic Studies*, 2003, Vol. 70(2), pp. 317–341.
+
+Ackerberg, Daniel A., Kevin Caves, and Garth Frazer.  
+*"Identification Properties of Recent Production Function Estimators."*  
+*Econometrica*, 2015, Vol. 83(6), pp. 2411–2451.
+
+Wooldridge, Jeffrey M.  
+*"On Estimating Firm-Level Production Functions Using Proxy Variables to Control for Unobservables."*  
+*Economics Letters*, 2009, Vol. 104(3), pp. 112–114.
+
+Syverson, Chad.  
+*"What Determines Productivity?"*  
+*Journal of Economic Literature*, 2011, Vol. 49(2), pp. 326–365.
