@@ -143,4 +143,9 @@ restore
 * data created 
 * to export data
 cd "/Users/jcm/Desktop/Theses Bachelor UVA/Compustat data, Production Functions and TFP/data"
+
+* Save as Stata .dta file
+save data.dta, replace
+
+* Export as CSV
 export delimited using "data.csv", replace
