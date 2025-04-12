@@ -60,8 +60,8 @@ Once we have estimates for the input elasticities we can construct TFP measures 
 - **data**
   Folder with required data and storage of data from Create_Data.do.
   - **Macroeconomic Data**
-    - `interest_rate.dta`: Nominal interest rates (FRED)
-    - `us_gdpdeflator.dta`: U.S. GDP deflator
+    - Nominal interest rates (FRED)
+    - U.S. GDP deflator
     - User cost of capital computed using nominal rates, inflation, and depreciation.
 
 ## Citation
