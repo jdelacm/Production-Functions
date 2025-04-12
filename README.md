@@ -66,8 +66,8 @@ Stata script for estimating production functions using `prodest`.
   - `m`: Intermediate inputs (COGS minus labor expenses)
 - Estimates three specifications:
   1. **OLS Cobb-Douglas**
-  2. **Levinsohn-Petrin (LP)** using `method(lp)`
-  3. **ACF correction** using `method(lp) acf`
+  2. **LP** using `method(lp)`
+  3. **ACF** using `method(lp) acf`
 - Saves first-stage residuals for TFP construction
 - Outputs results using `esttab` (LaTeX-compatible)
 
