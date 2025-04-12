@@ -26,20 +26,14 @@ Using financial statement data, we estimate **output elasticities** of capital a
 Assuming perfect competition and constant returns to scale, the elasticities are equivalent to revenue shares of inputs (see De Loecker et al., 2020; Syverson, 2011). This provides a useful baseline for production function identification.
 
 ### **TFP**
-TFP is computed as the ratio of actual output to the predicted contribution of inputs. In a Cobb-Douglas specification, this simplifies to a weighted geometric mean of inputs:
-
-\[
-TFP_{it} = \frac{Y_{it}}{K_{it}^{\alpha_K} L_{it}^{\alpha_L}
-\]
-
-where weights \(\alpha\) are estimated output elasticities. For further details, see Syverson (2011), Section 2.2.
+TFP is computed as the ratio of actual output to the predicted contribution of inputs. In a Cobb-Douglas specification, this simplifies to a weighted geometric mean of inputs where weights are the estimated output elasticities. For further details, see Syverson (2011), Section 2.2.
 
 
 ## Contents
 
 ### `Create_Data.do`
 
-Stata script for cleaning, processing, and merging firm-level and macroeconomic data. This file is adapted from the replication materials of De Loecker et al. (2020).
+Stata script for cleaning, processing, and merging firm-level data to prepare for Prod_Fun_Est.do. This file is adapted from the replication materials of De Loecker et al. (2020).
 
 **Main steps:**
 - Load Compustat data
