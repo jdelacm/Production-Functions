@@ -38,7 +38,6 @@ Stata script for cleaning, processing, and merging firm-level data to prepare fo
 **Main steps:**
 - Load Compustat data
 - Remove duplicates, drop firms without NAICS, and keep only consolidated records
-- Generate 2-, 3-, and 4-digit NAICS codes
 - Adjust monetary variables (e.g. reconstruct market value as `PRCC_F * CSHO`)
 - Merge macro data (GDP deflator, interest rates, user cost of capital)
 - Generate derived variables (e.g. capital expenditures, imputed materials)
